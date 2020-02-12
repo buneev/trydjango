@@ -1,17 +1,6 @@
 version: '3.7'
 
 services:
-  db:
-    image: postgres:10.1-alpine
-    ports:
-      - 5432:5432
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data/pgdata
-    environment:
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: try_django
-      PGDATA: /var/lib/postgresql/data/pgdata
-    restart: always
   web:
     build: ./app
     command: python manage.py runserver 0.0.0.0:8000
@@ -26,6 +15,15 @@ services:
       - db
     depends_on:
       - db
+  db:
+    image: postgres:10.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    env_file:
+      - ./.env.dev
+    restart: always
 
 volumes:
-  ./pg_data:
+  postgres_data:

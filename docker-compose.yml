@@ -2,11 +2,13 @@ version: '3.7'
 
 services:
   web:
-    restart: always
+    restart: always 
+    # путь к файлу Dockerfile, который нужно использовать для создания образа
     build: ./app
+    # команда, которую нужно запустить после создания образа
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./app/:/usr/src/app/
+      - ./app/:/code/
     ports:
       - "8000:8000"
     env_file:
@@ -15,13 +17,14 @@ services:
       - db
   db:
     image: postgres:10.1-alpine
+    restart: always 
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=trydjango_user
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=trydjango
-    restart: always
+      - PGDATA=/var/lib/postgresql/data/
 
 volumes:
   postgres_data:

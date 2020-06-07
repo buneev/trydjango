@@ -1,31 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>About</h1>
+    <h1>О нашей компании</h1>
 
-    <h3>{{ title|capfirst|title }}</h3>
-    <p>This is a template</p>
+    <!-- встроенные фильтры -->
+    <h3>{{ my_desc|title }}</h3>
 
     {{ my_html|safe }}
 
-    <p>
-    {{ my_number }}
-    {{ my_list }}
-    </p>
+    <p>{{ my_number }}</p>
+    <p>{{ my_list }}</p>
 
     <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-    </ul>
-
-    <ul>
-    {% for abc in my_list %}
-        {% if abc == 312 %}
-            <li>{{ forloop.counter }} - {{ abc|add:22 }}</li>
-        {% elif abc == "Abc" %}
+    {% for item in my_list %}
+        {% if item == 12 %}
+            <li>{{ forloop.counter }}) {{ item|add:22 }}</li>
+        {% elif item == "Abc" %}
             <li>This is not the network</li>
         {% else %}
-            <li>{{ forloop.counter }} - {{ abc }}</li>
+            <li>{{ forloop.counter }}) {{ item }}</li>
         {% endif %}
         
         

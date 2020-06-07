@@ -32,7 +32,7 @@ def product_create_view(request):
             form.save()
             # return redirect()
     else:
-        form = ProductForm(initial=init_data) # Инициализируем поля
+        form = ProductForm(initial=init_data) # инициализируем поля
     context = {
         'form': form
     }
